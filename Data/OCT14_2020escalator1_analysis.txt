@@ -1,0 +1,15 @@
+-------------------------------------------
+SUMMARY
+Overall run indicators:
+Input1:
+RMS: 0.3072233158815385
+Input2:
+RMS:0.12769588623877087
+
+Segmented run indicators: (10s) 
+Input1:
+RMS:
+0.3072233158815385
+Input2:
+RMS:
+0.12769588623877087

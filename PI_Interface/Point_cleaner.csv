@@ -1,0 +1,4 @@
+Point Name,Class,Type,Future,Description
+TEST_POINT_1,classic,float32,FALSE,test point 1
+TEST_POINT_2,classic,float32,FALSE,test point 2
+TEST_POINT_3,classic,float32,FALSE,test point 3
