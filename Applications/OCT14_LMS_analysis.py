@@ -4,19 +4,27 @@ from Util import segmentList
 import os
 
 # Get data file path
+
+# Local data files
+'''
 target_file_path = os.path.dirname(__file__)
 dir_index = target_file_path.rfind('/')
 target_file_path = target_file_path[:dir_index]
 # Config_
 target_file_path = target_file_path + '/Data/APM_OCT14_2020escalator1.txt'
+'''
+
+# Other data files
+target_file_path = 'C:/Users/camer/Desktop/Fall 2020 URI/oct_7_site/Data/APM_OCT14_2020_GATE120_SPEED1.txt'
+
 print(target_file_path)
 
 # Config_
 print("Reading Input1 data")
-raw_data_list_Input1 = readLMSData(target_file_path, 'Input1')
+raw_data_list_Input1 = readLMSData(target_file_path, 'Input1')[0]
 
 print("Reading Input2 data")
-raw_data_list_Input2 = readLMSData(target_file_path, 'Input2')
+raw_data_list_Input2 = readLMSData(target_file_path, 'Input2')[0]
 
 # Get the RMS value for the entire run
 run_rms_Input1 = calculateRMS(raw_data_list_Input1)

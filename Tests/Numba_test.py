@@ -9,9 +9,8 @@ def func(a):
     for i in range(10000000):
         a[i] += 1
 
-    # function optimized to run on gpu
 
-
+# function optimized to run on gpu
 @njit
 def func2(a):
     for i in range(10000000):

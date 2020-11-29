@@ -27,7 +27,8 @@ def writeToPI(data_list_, point_name_, client):
     for data_point in data_list_:
         thisPoint = PITimedValue()
         thisPoint.value = data_point.value
-        thisPoint.timestamp = reformatTimestamp(reformatTimestamp, data_point.timestamp, 0)
+        thisPoint.timestamp = data_point.timestamp
+        # thisPoint.timestamp = reformatTimestamp(reformatTimestamp, data_point.timestamp, 0)
         pi_data_list.append(thisPoint)
 
     thisStreamValue.items = pi_data_list
