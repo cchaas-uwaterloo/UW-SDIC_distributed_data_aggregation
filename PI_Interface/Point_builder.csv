@@ -1,3 +1,8 @@
 name_point,Class,Type,Future,Description,Asset,Property
 Unit_test_1,classic,float32,FALSE,point for unit testing,none,none
+Unit_test_1_mean,classic,float32,FALSE,point for unit testing,none,none
+Unit_test_1_stdev,classic,float32,FALSE,point for unit testing,none,none
+APM_Gate_120_RMS,classic,float32,FALSE,Gate 120 RMS data,APM_GATE_120,RMS
+APM_Gate_133_RMS,classic,float32,FALSE,Gate 133 RMS data,APM_GATE_133,RMS
+Escalator_1230_RMS,classic,float32,FALSE,Escalator 1230 RMS data,Escalator_1230,RMS
 

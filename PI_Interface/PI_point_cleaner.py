@@ -26,6 +26,6 @@ def removePIPoints(file_path_, client_):
             temp_point = client_.point.get_by_path("\\\\SDICPI\\" + row['name_point'])
             client_.point.delete(temp_point.web_id)
         except:
-            print('ERROR: Point [', row['name_point'], '] could not be removed from the database - delete failed')
+            print('WARNING: Point [', row['name_point'], '] could not be removed from the database - delete failed')
         else:
             print('Delete Success, the point [' + row['name_point'] + '] has been removed from the database')

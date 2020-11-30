@@ -12,25 +12,31 @@ return :
 void
 '''
 
-# TODO add error checking for write operation
-# TODO add reformat timestamp from LMS data?
+# TODO add bool return value
 
 
 def writeToPI(data_list_, point_name_, client):
 
-    thisCIPoint = client.point.get_by_path("\\\\SDICPI\\" + point_name_)
-    thisStreamValue = PIStreamValues()
-    thisStreamValue.web_id = thisCIPoint.web_id
+    try:
+        thisCIPoint = client.point.get_by_path("\\\\SDICPI\\" + point_name_)
+    except:
+        print('ERROR: Failed to find Point [', point_name_,
+              '] this point does not exist in the SDIC PI database')
 
-    pi_data_list = []
+    else:
+        thisStreamValue = PIStreamValues()
+        thisStreamValue.web_id = thisCIPoint.web_id
 
-    for data_point in data_list_:
-        thisPoint = PITimedValue()
-        thisPoint.value = data_point.value
-        thisPoint.timestamp = reformatTimestamp(reformatTimestamp, data_point.timestamp, 0)
-        pi_data_list.append(thisPoint)
+        pi_data_list = []
 
-    thisStreamValue.items = pi_data_list
-    response = client.stream.update_values(thisStreamValue.web_id, thisStreamValue.items)
-    print('added to point : ', point_name_)
-    print(response)
+        for data_point in data_list_:
+            thisPoint = PITimedValue()
+            thisPoint.value = data_point.value
+            thisPoint.timestamp = data_point.timestamp
+            # thisPoint.timestamp = reformatTimestamp(reformatTimestamp, data_point.timestamp, 0)
+            pi_data_list.append(thisPoint)
+
+        thisStreamValue.items = pi_data_list
+        response = client.stream.update_values(thisStreamValue.web_id, thisStreamValue.items)
+        print('added to point : ', point_name_)
+        print(response)

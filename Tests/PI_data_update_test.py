@@ -31,3 +31,5 @@ file_path = os.path.relpath(('..\\PI_Interface\\' + 'Point_builder.csv'), cur_pa
 createPIPoints(file_path, client, dataServer)
 
 writeToPI(data_list_test, "Unit_test_1", client)
+
+writeToPI(data_list_test, "Gibberish", client)

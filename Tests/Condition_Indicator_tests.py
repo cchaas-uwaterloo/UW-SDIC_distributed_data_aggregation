@@ -1,12 +1,22 @@
 import numpy as np
-from Operations import calculateRMS, calculateVariance, calculatePkPk, calculateCrestFactor, calculateCSum, calculateKurtosis
+from Operations import calculateRMS, calculateVariance, calculatePkPk, calculateCrestFactor, calculateCSum, \
+    calculateKurtosis, calculateMean, calculateStdev
 from collections import namedtuple
 from numba import njit
 
 
+def calculateMeantest(data_list_):
+    mean_leading = calculateMean(data_list_)
+    print("Mean point leading: ", mean_leading)
+    mean_trailing = calculateMean(data_list_, 'trailing')
+    print("Mean point trailing: ", mean_trailing)
+
+
 def calculateRMStest(data_list_):
-    rms = calculateRMS(data_list_)
-    print("RMS point: ", rms)
+    rms_leading = calculateRMS(data_list_)
+    print("RMS point leading: ", rms_leading)
+    rms_trailing = calculateRMS(data_list_, 'trailing')
+    print("RMS point trailing: ", rms_trailing)
 
 
 def calculateVariancetest(data_list_):
@@ -45,6 +55,13 @@ def calculateCSumtest(data_list_):
     print("Cumulative Sum point: ", c_sum)
 
 
+def calculateStdevtest(data_list_):
+    stdev_leading = calculateStdev(data_list_)
+    print("Stdev point leading: ", stdev_leading)
+    stdev_trailing = calculateStdev(data_list_, 'trailing')
+    print("Stdev point trailing: ", stdev_trailing)
+
+
 # Main
 DataPoint = namedtuple('DataPoint', ['value', 'timestamp'])
 
@@ -67,6 +84,8 @@ data_list_test = [data_point_add_1,
                   data_point_add_7,
                   data_point_add_8]
 
+calculateMeantest(data_list_test)
+
 calculateRMStest(data_list_test)
 
 calculateVariancetest(data_list_test)
@@ -78,4 +97,6 @@ calculatePkPktest(data_list_test)
 calculateKurtosistest(data_list_test)
 
 calculateCSumtest(data_list_test)
+
+calculateStdevtest(data_list_test)
 

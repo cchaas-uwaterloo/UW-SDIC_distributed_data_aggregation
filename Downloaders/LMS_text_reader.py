@@ -5,7 +5,7 @@ import typing
 '''
 brief : reads data from text file exported from LMS, reads data from a single channel
 args :
-file_name_ (string) absolute path to the text file 
+file_name_ (string) absolute path to the text file, note that directory delimiters must be '/'
 channel_ (string) PhysicalChannelID (shown in header of the text file) eg. 'Input1', 'Input2'
 returns : 
 data_list (list(namedtuple('dataPoint', ['value', 'timestamp']))) array of tuples with the data values and their timestamps
@@ -24,6 +24,9 @@ def readLMSData(file_name_, channel_):
     num_lines = 1
     current_line = 0
     preamble_delimiter = "Y axis unit	g"
+    abs_time_line = 2
+    line_index = 0
+    abs_time = []
 
     print("Download progress:")
 
@@ -33,6 +36,10 @@ def readLMSData(file_name_, channel_):
         for line in file:
             timestamp = 0
             data = 0
+
+            if line_index == abs_time_line:
+                time_line_words = line.split()
+                abs_time = time_line_words[2:6]
 
             # reading each word
             for pos, word in enumerate(line.split()):
@@ -61,7 +68,8 @@ def readLMSData(file_name_, channel_):
             if num_lines_indicator in line:
                 num_lines = line.split()[3]
 
-    print('Complete')
-    return data_list
+            line_index += 1
 
+    print('Complete')
+    return data_list, abs_time
 
