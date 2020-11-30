@@ -1,26 +1,53 @@
 import numpy as np
-import sys
 from scipy.signal import find_peaks
 from collections import namedtuple
 from scipy.stats import kurtosis
 from numba import jit, cuda, njit
 
 
-# NOTE: timestamps carried through from the beginning of the interval of interest
+'''
+brief : calculates the mean value of a set of data points
+args :
+data_list_ (list(namedtuple('dataPoint', ['value', 'timestamp']))) list of tuples with the data values and timestamps
+stamp_value_ (string) default param, with no input argument, sets timestamp of returned point to leading edge of passed
+                      list, set to 'trailing' to get trailing edge timestamp
+returns : 
+derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp 
+'''
+
+
+def calculateMean(data_list_, stamp_value_='leading'):
+    if stamp_value_ == 'leading':
+        timestamp = data_list_[0].timestamp
+    else:
+        timestamp = data_list_[(len(data_list_)-1)].timestamp
+
+    value = getNPArrayCPU(data_list_)
+    mean = np.mean(value)
+
+    dataPoint = namedtuple('dataPoint', ['value', 'timestamp'])
+    derived_point = dataPoint(mean, timestamp)
+
+    return derived_point
+
 
 '''
 brief : calculates Root Mean Squared value of set of data points
 args :
 data_list_ (list(namedtuple('dataPoint', ['value', 'timestamp']))) list of tuples with the data values and timestamps
+stamp_value_ (string) default param, with no input argument, sets timestamp of returned point to leading edge of passed
+                      list, set to 'trailing' to get trailing edge timestamp
 returns : 
-derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp inherited 
-                                                                from first point in the input list
+derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp
 '''
 
 
-def calculateRMS(data_list_):
-    timestamp = data_list_[0].timestamp
-    print("preparing to convert to numpy: ")
+def calculateRMS(data_list_, stamp_value_='leading'):
+    if stamp_value_ == 'leading':
+        timestamp = data_list_[0].timestamp
+    else:
+        timestamp = data_list_[(len(data_list_) - 1)].timestamp
+
     value = getNPArrayCPU(data_list_)
     rms = np.sqrt(np.mean(value**2))
 
@@ -34,14 +61,19 @@ def calculateRMS(data_list_):
 brief : calculates variance of set of data points
 args :
 data_list_ (list(namedtuple('dataPoint', ['value', 'timestamp']))) list of tuples with the data values and timestamps
+stamp_value_ (string) default param, with no input argument, sets timestamp of returned point to leading edge of passed
+                      list, set to 'trailing' to get trailing edge timestamp
 returns : 
-derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp inherited 
-                                                                from first point in the input list
+derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp 
 '''
 
 
-def calculateVariance(data_list_):
-    timestamp = data_list_[0].timestamp
+def calculateVariance(data_list_, stamp_value_='leading'):
+    if stamp_value_ == 'leading':
+        timestamp = data_list_[0].timestamp
+    else:
+        timestamp = data_list_[(len(data_list_) - 1)].timestamp
+
     value = getNPArrayCPU(data_list_)
     var = np.var(value, dtype=np.float64)
 
@@ -56,27 +88,29 @@ brief : calculates Crest Factor value of set of data points
 args :
 data_list_ (list(namedtuple('dataPoint', ['value', 'timestamp']))) list of tuples with the data values and timestamps
 mode_ (string) solution variation, options: base, avg (average), inter (interpolated)
+stamp_value_ (string) default param, with no input argument, sets timestamp of returned point to leading edge of passed
+                      list, set to 'trailing' to get trailing edge timestamp
 returns : 
-derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp inherited 
-                                                                from first point in the input list
+derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp
 '''
 
 
-def calculateCrestFactor(data_list_, mode_):
-    timestamp = data_list_[0].timestamp
+def calculateCrestFactor(data_list_, mode_, stamp_value_='leading'):
+    if stamp_value_ == 'leading':
+        timestamp = data_list_[0].timestamp
+    else:
+        timestamp = data_list_[(len(data_list_) - 1)].timestamp
+
     value = getNPArrayCPU(data_list_)
 
     if mode_ == 'base':
         peak = np.max(np.abs(value))  # largest recorded absolute value
-        print(peak)
     if mode_ == 'avg':
         list_v = list(find_peaks(np.abs(value), 0)[1].values())[0]
         peak = sum(list_v)
         peak /= len(list_v)
-        print(peak)
     if mode_ == 'inter':
         peak = np.percentile(np.abs(value), 100.0, interpolation='midpoint')  # interpolated largest absolute value
-        print(peak)
     rms = np.sqrt(np.mean(value**2))
 
     crest_factor = peak/rms
@@ -93,14 +127,19 @@ brief : calculates Peak to Peak value of set of data points
 args :
 data_list_ (list(namedtuple('dataPoint', ['value', 'timestamp']))) list of tuples with the data values and timestamps
 mode_ (string) solution variation, options: base, avg (average), inter (interpolated)
+stamp_value_ (string) default param, with no input argument, sets timestamp of returned point to leading edge of passed
+                      list, set to 'trailing' to get trailing edge timestamp
 returns : 
-derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp inherited 
-                                                                from first point in the input list
+derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp 
 '''
 
 
-def calculatePkPk(data_list_, mode_):
-    timestamp = data_list_[0].timestamp
+def calculatePkPk(data_list_, mode_, stamp_value_='leading'):
+    if stamp_value_ == 'leading':
+        timestamp = data_list_[0].timestamp
+    else:
+        timestamp = data_list_[(len(data_list_) - 1)].timestamp
+
     value = getNPArrayCPU(data_list_)
 
     if mode_ == 'base':
@@ -131,14 +170,19 @@ def calculatePkPk(data_list_, mode_):
 brief : calculates Kurtosis value of set of data points
 args :
 data_list_ (list(namedtuple('dataPoint', ['value', 'timestamp']))) list of tuples with the data values and timestamps
+stamp_value_ (string) default param, with no input argument, sets timestamp of returned point to leading edge of passed
+                      list, set to 'trailing' to get trailing edge timestamp
 returns : 
-derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp inherited 
-                                                                from first point in the input list
+derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp 
 '''
 
 
-def calculateKurtosis(data_list_, fisher_):
-    timestamp = data_list_[0].timestamp
+def calculateKurtosis(data_list_, fisher_, stamp_value_='leading'):
+    if stamp_value_ == 'leading':
+        timestamp = data_list_[0].timestamp
+    else:
+        timestamp = data_list_[(len(data_list_) - 1)].timestamp
+
     value = getNPArrayCPU(data_list_)
 
     kur = kurtosis(value, fisher=fisher_)
@@ -153,14 +197,19 @@ def calculateKurtosis(data_list_, fisher_):
 brief : calculates Cumulative Sum value of set of data points
 args :
 data_list_ (list(namedtuple('dataPoint', ['value', 'timestamp']))) list of tuples with the data values and timestamps
+stamp_value_ (string) default param, with no input argument, sets timestamp of returned point to leading edge of passed
+                      list, set to 'trailing' to get trailing edge timestamp
 returns : 
-derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp inherited 
-                                                                from first point in the input list
+derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp 
 '''
 
 
-def calculateCSum(data_list_):
-    timestamp = data_list_[0].timestamp
+def calculateCSum(data_list_, stamp_value_='leading'):
+    if stamp_value_ == 'leading':
+        timestamp = data_list_[0].timestamp
+    else:
+        timestamp = data_list_[(len(data_list_) - 1)].timestamp
+
     value = getNPArrayCPU(data_list_)
 
     c_sum_arr = np.cumsum(value)
@@ -173,10 +222,34 @@ def calculateCSum(data_list_):
     return derived_point
 
 
+'''
+brief : calculates the standard deviation of a set of points
+args :
+data_list_ (list(namedtuple('dataPoint', ['value', 'timestamp']))) list of tuples with the data values and timestamps
+stamp_value_ (string) default param, with no input argument, sets timestamp of returned point to leading edge of passed
+                      list, set to 'trailing' to get trailing edge timestamp
+returns : 
+derived_point (namedtuple('dataPoint', ['value', 'timestamp'])) tuple with derived data value and timestamp 
+'''
+
+
+def calculateStdev(data_list_, stamp_value_='leading'):
+    if stamp_value_ == 'leading':
+        timestamp = data_list_[0].timestamp
+    else:
+        timestamp = data_list_[(len(data_list_)-1)].timestamp
+
+    value = getNPArrayCPU(data_list_)
+    stdev = np.std(value)
+
+    dataPoint = namedtuple('dataPoint', ['value', 'timestamp'])
+    derived_point = dataPoint(stdev, timestamp)
+
+    return derived_point
+
+
 @njit
 def getNPArrayGPU(data_list_):
-    print('Converting to NumPY array:')
-    # print('Progress:')
     arr = np.empty(len(data_list_))
     for point_index, point in enumerate(data_list_):
         arr[point_index] = point.value
@@ -184,8 +257,6 @@ def getNPArrayGPU(data_list_):
 
 
 def getNPArrayCPU(data_list_):
-    print('Converting to NumPY array:')
-    # print('Progress:')
     arr = np.empty(len(data_list_))
     for point_index, point in enumerate(data_list_):
         arr[point_index] = point.value

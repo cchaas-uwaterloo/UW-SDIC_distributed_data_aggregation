@@ -38,4 +38,4 @@ def createPIPoints(file_path_, client_, dataServer_):
             res1 = client_.dataServer.create_point_with_http_info(dataServer_.web_id, newPoint)
             print('Add success, the point [' + row['name_point'] + '] has been added to the database')
         else:
-            print('ERROR: Point [', row['name_point'], '] already exists in the SDIC PI database - add failed')
+            print('WARNING: Point [', row['name_point'], '] already exists in the SDIC PI database - add failed')
