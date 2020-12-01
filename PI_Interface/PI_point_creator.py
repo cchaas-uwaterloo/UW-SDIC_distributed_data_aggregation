@@ -1,7 +1,6 @@
 from osisoft.pidevclub.piwebapi.models import PIPoint
 import csv
 import urllib3
-from PI_Interface.PI_connection import connectToPIServer
 
 '''
 brief : creates PI points based one csv file passed, see example files for formatting details 

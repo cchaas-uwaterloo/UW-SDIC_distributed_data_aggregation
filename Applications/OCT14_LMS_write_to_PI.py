@@ -20,7 +20,7 @@ target_file_path = target_file_path + '/Data/APM_OCT14_2020escalator1.txt'
 # Other data files
 target_file_path = 'C:/Users/camer/Desktop/Fall 2020 URI/oct_7_site/Data/APM_OCT14_2020escalator1.txt'
 
-target_write_point = 'Escalator_1230_RMS'
+target_write_point = 'Escalator_1230_RMS_Speed2'
 
 print(target_file_path)
 

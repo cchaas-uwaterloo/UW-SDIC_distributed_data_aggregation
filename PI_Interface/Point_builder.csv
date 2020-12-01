@@ -5,4 +5,43 @@ Unit_test_1_stdev,classic,float32,FALSE,point for unit testing,none,none
 APM_Gate_120_RMS,classic,float32,FALSE,Gate 120 RMS data,APM_GATE_120,RMS
 APM_Gate_133_RMS,classic,float32,FALSE,Gate 133 RMS data,APM_GATE_133,RMS
 Escalator_1230_RMS,classic,float32,FALSE,Escalator 1230 RMS data,Escalator_1230,RMS
+APM_Gate_120_RMS_Speed1,classic,float32,FALSE,Gate 120 Speed 1 RMS Data,APM_Gate_120,RMS
+APM_Gate_120_RMS_Speed2,classic,float32,FALSE,Gate 120 Speed 2 RMS Data,APM_Gate_120,RMS
+APM_Gate_120_RMS_Speed3,classic,float32,FALSE,Gate 120 Speed 3 RMS Data,APM_Gate_120,RMS
+APM_Gate_120_RMS_Speed4,classic,float32,FALSE,Gate 120 Speed 4 RMS Data,APM_Gate_120,RMS
+APM_Gate_133_RMS_RJSpeed1,classic,float32,FALSE,Gate 120 RJ Speed 1 RMS Data,APM_Gate_133,RMS
+APM_Gate_133_RMS_RJSpeed2,classic,float32,FALSE,Gate 120 RJ Speed 2 RMS Data,APM_Gate_133,RMS
+APM_Gate_133_RMS_WBSpeed1,classic,float32,FALSE,Gate 120 WB Speed 1 RMS Data,APM_Gate_133,RMS
+APM_Gate_133_RMS_WBSpeed2,classic,float32,FALSE,Gate 120 WB Speed 2 RMS Data,APM_Gate_133,RMS
+Escalator_1230_RMS_Speed1,classic,float32,FALSE,Escalator 1230 Speed 1 RMS data,Escalator_1230,RMS
+Escalator_1230_RMS_Speed2,classic,float32,FALSE,Escalator 1230 Speed 2 RMS data,Escalator_1230,RMS
+APM_Gate_120_RMS_Mean,classic,float32,FALSE,Gate 120 RMS SPC mean,APM_GATE_120,SPC_mean
+APM_Gate_133_RMS_Mean,classic,float32,FALSE,Gate 133 RMS SPC mean,APM_GATE_133,SPC_mean
+Escalator_1230_RMS_Mean,classic,float32,FALSE,Escalator 1230 RMS SPC mean,Escalator_1230,SPC_mean
+APM_Gate_120_RMS_Speed1_Mean,classic,float32,FALSE,Gate 120 Speed 1 RMS SPC mean,APM_Gate_120,SPC_mean
+APM_Gate_120_RMS_Speed2_Mean,classic,float32,FALSE,Gate 120 Speed 2 RMS SPC mean,APM_Gate_120,SPC_mean
+APM_Gate_120_RMS_Speed3_Mean,classic,float32,FALSE,Gate 120 Speed 3 RMS SPC mean,APM_Gate_120,SPC_mean
+APM_Gate_120_RMS_Speed4_Mean,classic,float32,FALSE,Gate 120 Speed 4 RMS SPC mean,APM_Gate_120,SPC_mean
+APM_Gate_133_RMS_RJSpeed1_Mean,classic,float32,FALSE,Gate 133 RJ Speed 1 RMS SPC Mean,APM_Gate_133,SPC_mean
+APM_Gate_133_RMS_RJSpeed2_Mean,classic,float32,FALSE,Gate 133 RJ Speed 2 RMS SPC Mean,APM_Gate_133,SPC_mean
+APM_Gate_133_RMS_WBSpeed1_Mean,classic,float32,FALSE,Gate 133 WB Speed 1 RMS SPC Mean,APM_Gate_133,SPC_mean
+APM_Gate_133_RMS_WBSpeed2_Mean,classic,float32,FALSE,Gate 133 WB Speed 2 RMS SPC Mean,APM_Gate_133,SPC_mean
+Escalator_1230_RMS_Speed1_Mean,classic,float32,FALSE,Escalator 1230 Speed 1 RMS SPC Mean,Escalator_1230,SPC_mean
+Escalator_1230_RMS_Speed2_Mean,classic,float32,FALSE,Escalator 1230 Speed 2 RMS SPC Mean,Escalator_1230,SPC_mean
+APM_Gate_120_RMS_Stdev,classic,float32,FALSE,Gate 120 RMS SPC stdev,APM_GATE_120,SPC_stdev
+APM_Gate_133_RMS_Stdev,classic,float32,FALSE,Gate 133 RMS SPC stdev,APM_GATE_133,SPC_stdev
+Escalator_1230_RMS_Stdev,classic,float32,FALSE,Escalator 1230 RMS SPC stdev,Escalator_1230,SPC_stdev
+APM_Gate_120_RMS_Speed1_Stdev,classic,float32,FALSE,Gate 120 Speed 1 RMS SPC stdev,APM_Gate_120,SPC_stdev
+APM_Gate_120_RMS_Speed2_Stdev,classic,float32,FALSE,Gate 120 Speed 2 RMS SPC stdev,APM_Gate_120,SPC_stdev
+APM_Gate_120_RMS_Speed3_Stdev,classic,float32,FALSE,Gate 120 Speed 3 RMS SPC stdev,APM_Gate_120,SPC_stdev
+APM_Gate_120_RMS_Speed4_Stdev,classic,float32,FALSE,Gate 120 Speed 4 RMS SPC stdev,APM_Gate_120,SPC_stdev
+APM_Gate_133_RMS_RJSpeed1_Stdev,classic,float32,FALSE,Gate 133 RJ Speed 1 RMS SPC stdev,APM_Gate_133,SPC_stdev
+APM_Gate_133_RMS_RJSpeed2_Stdev,classic,float32,FALSE,Gate 133 RJ Speed 2 RMS SPC stdev,APM_Gate_133,SPC_stdev
+APM_Gate_133_RMS_WBSpeed1_Stdev,classic,float32,FALSE,Gate 133 WB Speed 1 RMS SPC stdev,APM_Gate_133,SPC_stdev
+APM_Gate_133_RMS_WBSpeed2_Stdev,classic,float32,FALSE,Gate 133 WB Speed 2 RMS SPC stdev,APM_Gate_133,SPC_stdev
+Escalator_1230_RMS_Speed1_Stdev,classic,float32,FALSE,Escalator 1230 Speed 1 RMS SPC stdev,Escalator_1230,SPC_stdev
+Escalator_1230_RMS_Speed2_Stdev,classic,float32,FALSE,Escalator 1230 Speed 2 RMS SPC stdev,Escalator_1230,SPC_stdev
+
+
+
 

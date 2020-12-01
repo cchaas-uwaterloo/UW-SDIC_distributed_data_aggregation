@@ -1,7 +1,5 @@
-import osisoft.pidevclub.piwebapi
 from osisoft.pidevclub.piwebapi.pi_web_api_client import PIWebApiClient
 from osisoft.pidevclub.piwebapi.models import PIAnalysis, PIItemsStreamValues, PIStreamValues, PITimedValue, PIRequest, PIResponse, PIPoint
-from osisoft.pidevclub.piwebapi.rest import ApiException
 
 
 client = PIWebApiClient("https://sdicpi/piwebapi", useKerberos=False, username="admin-stan", password="BT5mR,!R", verifySsl=False)
