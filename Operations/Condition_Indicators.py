@@ -1,4 +1,5 @@
 import numpy as np
+from numpy import fft
 from scipy.signal import find_peaks
 from collections import namedtuple
 from scipy.stats import kurtosis
@@ -246,6 +247,16 @@ def calculateStdev(data_list_, stamp_value_='leading'):
     derived_point = dataPoint(stdev, timestamp)
 
     return derived_point
+
+
+def getFrequencySpectrum(data_list_, sampling_freq_):
+    value = getNPArrayCPU(data_list_)
+    fft_value = np.fft.fft(value)
+    n = value.size
+    timestep = 1/sampling_freq_
+    freq = np.fft.fftfreq(n, d=timestep)
+
+    return fft_value, freq
 
 
 @njit

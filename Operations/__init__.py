@@ -6,5 +6,6 @@ from .Condition_Indicators import calculatePkPk
 from .Condition_Indicators import calculateKurtosis
 from .Condition_Indicators import calculateCSum
 from .Condition_Indicators import calculateStdev
+from .Condition_Indicators import getFrequencySpectrum
 from .Condition_Indicators import getNPArrayGPU
 from .Condition_Indicators import getNPArrayCPU
