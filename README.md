@@ -103,7 +103,7 @@ General utilities including:
 **Issue**: LORD -> PI timestamp conversion is slow  
 **Description**: the mscl timestamp string() accessor method doesn't work (as far as I can tell). Currently to get the timestamp, the reformatTimestamp method creates a text file, writes the mscl timestamp, reads it from the text file, closes the text file, then does the conversion to PI format. This is very slow. 
 
-**Issue**: WSDA internal time switches time zones
+**Issue**: WSDA internal time switches time zones  
 **Description**: The WSDA internal clock is sometimes not on EST when powered on. This might be due to connecting to my own computer that has timezone issues though. Can eb fixed by setting timezone in the WSDA control pannel. 
 
 ## TODO
